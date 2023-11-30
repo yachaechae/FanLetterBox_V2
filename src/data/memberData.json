@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "name":"성진",
+        "colorCode":"#a06743",
+        "emoji":"🐻"
+    },
+    {
+        "id": "2",
+        "name":"Young K",
+        "colorCode":"#d3872f",
+        "emoji":"🦊"
+    },
+    {
+        "id": "3",
+        "name":"원필",
+        "colorCode":"#fbc4ca",
+        "emoji":"🐰"
+    },
+    {
+        "id": "4",
+        "name":"도운",
+        "colorCode":"#e9c181",
+        "emoji":"🐶"
+    }
+]
