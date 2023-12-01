@@ -1,6 +1,6 @@
 import styled from "styled-components";
 const defaultBgColor = "#57c3c5";
-const fontColor = "#000";
+const fontColor = "#141A29";
 export const MasterBtn = styled.button`
     cursor: pointer;
     width: fit-content;
@@ -9,4 +9,4 @@ export const MasterBtn = styled.button`
     padding: 0.5rem 1rem;
     border: 0;
     font-size: 1rem;
-`
+`;
