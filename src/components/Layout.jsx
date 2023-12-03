@@ -1,9 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
+import { logOut } from "redux/slice/auth";
 import { Anchor, HeaderContainer, LayoutHeader } from "style/HeaderStyle";
 
 export default function Layout({ children }) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const onLogOut = () => {
+        dispatch(logOut());
+    };
 
     return (
         <>
@@ -24,7 +31,9 @@ export default function Layout({ children }) {
                         >
                             MY PROFILE
                         </Anchor>
-                        <Anchor value="home">LOGOUT</Anchor>
+                        <Anchor value="home" onClick={onLogOut}>
+                            LOGOUT
+                        </Anchor>
                     </div>
                 </HeaderContainer>
             </LayoutHeader>
