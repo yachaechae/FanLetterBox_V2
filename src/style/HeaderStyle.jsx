@@ -34,7 +34,7 @@ export const HeaderStyles = styled.div`
         position: absolute;
         top: 0;
         content: "";
-        background: url(https://lv2-cdn.azureedge.net/day6/381be0f8941d40bc952d18aee73ab0c1-%EB%8B%A8%EC%B2%B4%201.jpg),
+        background: url(https://i.namu.wiki/i/8rNzNv98rBPPlOaOpWHXFV-hy8E3Vk_2MN-VO4nbHn0rVOLGNz31GHrSARL940GWjJBrw1DHUA_mVYnPqkiO1h3mpuBK1GA0XDzJvUfnwzUWg95Gl1F25prDqJvw2AMLeFKb0RXY8rbjZAlKHfPx4Q.webp),
             linear-gradient(126deg, #a5682b, #a5682b, #ecde61);
         width: 100%;
         height: 100%;
