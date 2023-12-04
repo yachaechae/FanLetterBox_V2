@@ -1,4 +1,4 @@
-import axiosInstance from "../axios/handlerAxios";
+import { authAxiosInstance } from "../axios/handlerAxios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ export default function Login() {
     const [inputValue, setInputValue] = useState({
         id: "",
         password: "",
-        nickName: "",
+        nickname: "",
     });
 
     const toggleLoginMode = (event) => {
@@ -50,9 +50,9 @@ export default function Login() {
             return;
         }
 
-        axiosInstance.post("/login", inputValue).then((res) => {
+        authAxiosInstance.post("/login?expiresIn=10m", inputValue).then((res) => {
             toast("로그인 완료!");
-            dispatch(logIn(res.data.accessToken));
+            dispatch(logIn(res.data));
             navigate("/");
         });
     };
@@ -70,7 +70,8 @@ export default function Login() {
             toast.warning("닉네임을 1~10글자 사이로 입력해주세요.");
             return;
         }
-        axiosInstance.post("/register", inputValue).then((res) => {
+        console.log(inputValue);
+        authAxiosInstance.post("/register", inputValue).then((res) => {
             toast("회원가입 완료!");
             navigate("/");
         });
@@ -117,15 +118,15 @@ export default function Login() {
                 {!isLoginMode && (
                     <>
                         <SectionStyle>
-                            <InputStyle as="label" htmlFor="nickName">
+                            <InputStyle as="label" htmlFor="nickname">
                                 닉네임
                             </InputStyle>
                             <InputStyle
                                 type="text"
-                                id="nickName"
+                                id="nickname"
                                 placeholder="닉네임을 입력해주세요 (1~10글자)"
-                                name="nickName"
-                                value={inputValue.nickName}
+                                name="nickname"
+                                value={inputValue.nickname}
                                 onChange={loginInfo}
                                 required
                                 minLength={1}

@@ -7,16 +7,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { addLetterList } from "redux/slice/letter";
 import Profile from "pages/Profile";
 import Layout from "components/Layout";
+import { logIn, logOut } from "redux/slice/auth";
 
 export default function Router() {
     const dispatch = useDispatch();
     const isLogin = useSelector((state) => state.auth.isLogin);
+    const userInfo = useSelector((state) => state.auth.user);
     const [letterList, setLetterList] = useState([]);
     useEffect(() => {
         const saveLocalStorage = JSON.parse(localStorage.getItem("letterList"));
-        if (saveLocalStorage) {
-            dispatch(addLetterList(saveLocalStorage));
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (isLogin) {
+        }
+        if (user) {
+            if (saveLocalStorage) {
+                dispatch(addLetterList(saveLocalStorage));
+            }
+            dispatch(logIn(user));
             setLetterList(saveLocalStorage);
+        } else {
+            dispatch(logOut());
         }
     }, []);
     return (

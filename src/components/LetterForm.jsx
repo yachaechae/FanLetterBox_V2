@@ -3,28 +3,35 @@ import MemberData from "data/memberData";
 import { FormStyle, InputStyle, SectionStyle, SelectStyle } from "style/InputFormStyle";
 import { MasterBtn } from "style/MasterBtnStyle";
 import { useDispatch, useSelector } from "react-redux";
-import { addLetterList, addNewLetter } from "redux/slice/letter";
+import { addLetterList, addNewLetter, addLetterThunk } from "redux/slice/letter";
+import { authAxiosInstance, serverAxiosInstance } from "../axios/handlerAxios";
+import { logOut } from "redux/slice/auth";
 
 export default function LetterForm() {
     const letterList = useSelector((state) => state.letter.letterList);
     const letter = useSelector((state) => state.letter.letter);
-    console.log(letterList);
-    console.log(letter);
+    const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const [letterOwner, setLetterOwner] = useState("");
 
     const letterInfo = (e) => {
         const { name, value } = e.target;
-        console.log(name, value, letterOwner);
-
-        const letterData = { name: name, value: value, letterOwner: letterOwner };
+        const letterData = {
+            name: name,
+            value: value,
+            letterOwner: letterOwner,
+            nickName: user.nickname,
+            avatar: user.avatar,
+            userId: user.userId,
+        };
         dispatch(addNewLetter(letterData));
     };
+
     const writeForm = (event) => {
         event.preventDefault();
-        const newLetter = [...letterList, { ...letter }];
-        dispatch(addLetterList(newLetter));
+        dispatch(addLetterThunk(letter));
     };
+
     useEffect(() => {}, [letterOwner]);
 
     return (
@@ -60,16 +67,7 @@ export default function LetterForm() {
                     <InputStyle as="label" htmlFor="nickName">
                         닉네임
                     </InputStyle>
-                    <InputStyle
-                        type="text"
-                        id="nickName"
-                        placeholder="닉네임을 입력해주세요 (최대 20자)"
-                        name="nickName"
-                        value={letter.nickName}
-                        onChange={letterInfo}
-                        required
-                        maxLength={20}
-                    />
+                    {user.nickname}
                 </SectionStyle>
 
                 <SectionStyle>

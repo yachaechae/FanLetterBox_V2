@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PiUserCircleThin } from "react-icons/pi";
 import memberData from "data/memberData";
 import { LetterBox, Message, ProfileIcon, ProfileText, Sender } from "style/LetterListStyle";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLetterList } from "redux/slice/letter";
 
 export default function LetterList() {
     const selectedId = useSelector((state) => state.member.selectedId);
     const letterList = useSelector((state) => state.letter.letterList);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchLetterList());
+    }, [selectedId]);
     let letterData = letterList;
     if (selectedId) {
         const selectedName = memberData.filter((member) => member.id === selectedId)[0].name;
@@ -28,11 +35,14 @@ export default function LetterList() {
     } else {
         letterData = letterList;
     }
-    return !letterData.length == 0 ? (
+    console.log(letterList);
+    console.log(letterData.length);
+    console.log(letterData.length !== 0);
+    return letterData.length !== 0 ? (
         <LetterBox>
             {letterData.map((letter) => {
                 return (
-                    <Link to={`/detail/${letter.letterId}`} key={letter.letterId}>
+                    <Link to={`/detail/${letter.id}`} key={letter.id}>
                         <Sender>
                             <ProfileIcon>
                                 <PiUserCircleThin className="icon" size="70" fill="#fff" />

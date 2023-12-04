@@ -19,10 +19,8 @@ export default function Header() {
         console.log(id);
         console.log(selectedId);
         if (selectedId === id) {
-            console.log("id와 같을떄");
             dispatch(selectedMemberId(""));
         } else {
-            console.log("id와 다를때");
             dispatch(selectedMemberId(id));
         }
     };
